@@ -1,6 +1,7 @@
 ---
 name: vllm-rocm-pr-patterns
-description: Conventions that get a ROCm/AMD change merged into vllm-project/vllm - PR title and body shape, platform-gating helpers (on_cdna / get_cdna_version / on_rdna, rocm_aiter_ops), AMD Buildkite mirror wiring in .buildkite/test_areas, and the recurring ROCm failure classes (HIP hardware queues, Triton gfx942 miscompiles, AITER version drift, shared-host VRAM, ephemeral port races). Use when writing, reviewing or debugging a ROCm change for upstream vLLM, when adding or fixing an :amd: CI step, when gating code by AMD GPU architecture, when an AMD CI job fails, or when deciding what evidence a ROCm PR needs.
+description: >-
+  Conventions that get a ROCm/AMD change merged into vllm-project/vllm - PR title and body shape, platform-gating helpers (on_cdna / get_cdna_version / on_rdna, rocm_aiter_ops), AMD Buildkite mirror wiring in .buildkite/test_areas, and the recurring ROCm failure classes (HIP hardware queues, Triton gfx942 miscompiles, AITER version drift, shared-host VRAM, ephemeral port races). Use when writing, reviewing or debugging a ROCm change for upstream vLLM, when adding or fixing an :amd: CI step, when gating code by AMD GPU architecture, when an AMD CI job fails, or when deciding what evidence a ROCm PR needs.
 ---
 
 # Merged ROCm PRs in vLLM
