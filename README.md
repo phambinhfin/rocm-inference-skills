@@ -1,47 +1,56 @@
-# vllm-rocm-skills
+# rocm-inference-skills
 
-An agent skill describing how a ROCm/AMD change actually gets merged into
-[vllm-project/vllm](https://github.com/vllm-project/vllm).
+Agent skills for contributing to the two repositories behind LLM inference on AMD GPUs:
+[vllm-project/vllm](https://github.com/vllm-project/vllm) on ROCm, and
+[ROCm/aiter](https://github.com/ROCm/aiter), the kernel library behind vLLM's
+`VLLM_ROCM_USE_AITER*` paths.
 
-It was written by reading the 30 most recently merged `rocm`-labelled pull requests (#63260 to
-#64158) and keeping only what an agent could not guess: the architecture-gating helpers
-maintainers ask for in review, how AMD steps are wired into Buildkite, the ROCm failure classes
-that come back again and again, and the evidence a ROCm PR has to carry.
+Each was written by reading the 30 most recently merged pull requests in its repository and
+keeping only what an agent could not guess: the conventions maintainers enforce in review, how
+the CI is wired, the failure classes that come back again and again, and the evidence a change
+has to carry.
 
-| Path | What it is |
+| Skill | Covers |
 |---|---|
-| [skills/vllm-rocm-pr-patterns/SKILL.md](skills/vllm-rocm-pr-patterns/SKILL.md) | The skill. Title and body conventions, platform gating, AMD CI wiring, failure classes, evidence standards. |
-| [skills/vllm-rocm-pr-patterns/cases.md](skills/vllm-rocm-pr-patterns/cases.md) | One line per source PR, grouped by lesson, so any rule can be traced to the change it came from. |
+| [vllm-rocm-pr-patterns](skills/vllm-rocm-pr-patterns/SKILL.md) | ROCm changes to vLLM: architecture-gating helpers, AMD Buildkite mirror wiring, HIP hardware queues, Triton gfx942 miscompiles, AITER version drift, shared-host VRAM, ephemeral port races. |
+| [aiter-pr-patterns](skills/aiter-pr-patterns/SKILL.md) | aiter changes: which of aiter's own in-repo skills to open, automatic PR title tags, the op_tests runner that reports success without running a test, per-architecture JIT build failures, tuned-config dispatch traps. |
+
+Each skill has a `cases.md` next to it mapping every rule back to the pull request it came from,
+so a claim can be checked rather than taken on trust.
 
 ## Install
 
-The skill is a plain directory with a `SKILL.md`, so most agents can use it by copying it into
+A skill is a plain directory with a `SKILL.md`, so most agents can use it by copying it to
 wherever they look for skills:
 
 ```bash
-git clone https://github.com/phambinhfin/vllm-rocm-skills
-cp -r vllm-rocm-skills/skills/vllm-rocm-pr-patterns ~/.cursor/skills/      # Cursor
-cp -r vllm-rocm-skills/skills/vllm-rocm-pr-patterns ~/.claude/skills/      # Claude Code
+git clone https://github.com/phambinhfin/rocm-inference-skills
+cp -r rocm-inference-skills/skills/* ~/.cursor/skills/      # Cursor
+cp -r rocm-inference-skills/skills/* ~/.claude/skills/      # Claude Code
 ```
 
-To scope it to one checkout instead, copy it into `.cursor/skills/` or `.claude/skills/` in the
-repository you work in. Agents without skill support can read `SKILL.md` directly.
+To scope them to one checkout instead, copy into `.cursor/skills/` or `.claude/skills/` in the
+repository you work in. Agents without skill support can read the `SKILL.md` files directly.
 
 ## Scope
 
-This is unofficial and is not maintained by the vLLM project. It is a summary of observed
-practice, not policy, and upstream moves fast — the AITER pin, the ROCm image tags, the
-Buildkite device pools and the PR template all change.
+Unofficial, and not maintained by either project. These summarise observed practice, not policy,
+and both repositories move fast — the AITER pin, the ROCm image tags, the CI device pools, the
+supported `gfx` targets and the PR templates all change.
 
-**Read vLLM's own instructions first.** They are authoritative and mandatory for AI-assisted
-contributions:
+**Read each repository's own instructions first.** They are authoritative, and for vLLM they are
+mandatory for AI-assisted contributions:
 
-- [`AGENTS.md`](https://github.com/vllm-project/vllm/blob/main/AGENTS.md)
-- [`tests/AGENTS.md`](https://github.com/vllm-project/vllm/blob/main/tests/AGENTS.md)
-- [`.agents/skills/pr-checklist/SKILL.md`](https://github.com/vllm-project/vllm/blob/main/.agents/skills/pr-checklist/SKILL.md)
+- vLLM: [`AGENTS.md`](https://github.com/vllm-project/vllm/blob/main/AGENTS.md),
+  [`tests/AGENTS.md`](https://github.com/vllm-project/vllm/blob/main/tests/AGENTS.md),
+  [`.agents/skills/pr-checklist/`](https://github.com/vllm-project/vllm/blob/main/.agents/skills/pr-checklist/SKILL.md)
+- aiter: [`CONTRIBUTE.md`](https://github.com/ROCm/aiter/blob/main/CONTRIBUTE.md), the eight
+  skills in [`.claude/skills/`](https://github.com/ROCm/aiter/tree/main/.claude/skills), and
+  [`.github/instructions/`](https://github.com/ROCm/aiter/tree/main/.github/instructions).
+  `aiter-pr-patterns` points at the right one per change rather than duplicating them.
 
-Everything cited here is from public pull requests and public source in `vllm-project/vllm`.
+Everything cited here is from public pull requests and public source in the two repositories.
 
 ## License
 
-Apache-2.0, matching vLLM.
+Apache-2.0.

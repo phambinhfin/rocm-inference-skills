@@ -7,7 +7,8 @@ description: Conventions that get a ROCm/AMD change merged into vllm-project/vll
 
 Distilled from the 30 most recently merged `rocm`-labelled PRs in `vllm-project/vllm`
 (#63260 to #64158). This covers what is specific to ROCm; it does not restate vLLM's general
-contribution rules, which live in the repo itself.
+contribution rules, which live in the repo itself. For the kernel library on the other side of
+the `VLLM_ROCM_USE_AITER*` flags, see `aiter-pr-patterns`.
 
 **Read the repo's own instructions first — they are mandatory and they change:**
 `AGENTS.md`, `tests/AGENTS.md`, and the `/pr-checklist` skill at
